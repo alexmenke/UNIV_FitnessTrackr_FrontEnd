@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({ logout, token }) => {
     return (
         <header>
-            <nav>
-                <Link to='/'>Home</Link>
-                <Link to='/profile'>Profile</Link>
-                <Link to='/login'>Login</Link>
-                <Link to='/register'>Register</Link>
-                <Link to='/routines'>Routines</Link>
-                <Link to='/activities'>Activities</Link>
+            <nav className="navbar">
+                <Link to='/' className="navLinks">Home</Link>
+                <Link to='/login' className="navLinks">Login</Link>
+                <Link to='/register' className="navLinks">Register</Link>
+                <Link to='/routines' className="navLinks">Routines</Link>
+                <Link to='/activities' className="navLinks">Activities</Link>
+                <Link to='/profile' className="navLinks">Profile</Link>
             </nav>
         </header>
     )
