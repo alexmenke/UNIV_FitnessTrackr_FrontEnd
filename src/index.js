@@ -6,7 +6,7 @@ import {
     Navbar,
     Login,
     Register,
-    Profile,
+    MyRoutines,
     Routines,
     Activities,
     RoutineActivities,
@@ -21,7 +21,7 @@ const App = () => {
         <Navbar />
         <Routes>
             <Route path='/' element={ <Home /> } />
-            <Route path='/profile' element={ <Profile /> } />
+            <Route path='/myroutines' element={ <MyRoutines /> } />
             <Route path='/login' element={ <Login /> } />
             <Route path='/register' element={ <Register /> } />
             <Route path='/routines' element={ <Routines /> } />
