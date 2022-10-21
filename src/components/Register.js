@@ -10,7 +10,7 @@ const Register = ({ setToken, navigate }) => {
       if (results.success) {
         setToken(results.data.token);
         window.localStorage.setItem('token', results.data.token);
-        navigate('/profile');
+        navigate('/myroutines');
       } else {
         console.log(results.error.message)
       }

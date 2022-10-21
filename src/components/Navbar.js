@@ -10,7 +10,7 @@ const Navbar = ({ logout, token }) => {
                 <Link to='/register' className="navLinks">Register</Link>
                 <Link to='/routines' className="navLinks">Routines</Link>
                 <Link to='/activities' className="navLinks">Activities</Link>
-                <Link to='/profile' className="navLinks">Profile</Link>
+                <Link to='/myroutines' className="navLinks">My Routines</Link>
             </nav>
         </header>
     )
