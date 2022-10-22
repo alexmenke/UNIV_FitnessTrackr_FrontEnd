@@ -109,9 +109,9 @@ export const getMyRoutines = async () => {
   }
 }
 
-export const updateRoutine = async ({ name, goal, isPublic, routineID }) => {
+export const updateRoutine = async ({ name, goal, isPublic, routineId }) => {
   try {
-    const response = await fetch(`${baseURL}/routines/${routineID}`, {
+    const response = await fetch(`${baseURL}/routines/${routineId}`, {
       method: "PATCH",
       body: JSON.stringify({
         name: name,

@@ -52,13 +52,6 @@ import {
                   }}>
                   Activities
                 </Button></Link>
-                <Link to='/login'><Button
-                  style={{
-                    margin: '.10rem',
-                    color: '#FB9039',
-                  }}>
-                  Login
-                </Button></Link>
                 {
                   token ? (
                     <>

@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { loginUser } from '../api';
+import {
+    Grid,
+    Paper,
+    TextField,
+    Button
+  } from '@mui/material'
 
 const Login = ({setToken, navigate}) => {
     const [username, setUsername] = useState('');
@@ -24,16 +30,59 @@ const Login = ({setToken, navigate}) => {
             console.log(error.message)
         }
     }
+
+    const paperStyle = {
+        padding: 20,
+        width: 300,
+        margin: '20px auto'
+      }
+
     return (
-        <form onSubmit={(event) => {
+        <Grid>
+        <Paper elevation={10} style={paperStyle}>
+          <form onSubmit={(event) => {
             event.preventDefault();
             verifyPassword();
-        }}>
-            <input type='text' placeholder='Enter username'></input>
-            <input type='text' placeholder='Enter password'></input>
-            <input type='text' placeholder='Confirm password'></input>
-            <button type='submit'>Sign In</button>
-        </form>
+          }}>
+            <Grid
+              align='center'
+              className='loginAndRegisterHeading'>
+              <h2>Sign In</h2>
+            </Grid>
+            <TextField
+              style={{ marginBottom: '.75rem' }}
+              label="Username"
+              placeholder="Enter username"
+              fullWidth required
+              onChange={(event) => setUsername(event.target.value)} />
+            <TextField
+              style={{ marginBottom: '.75rem' }}
+              label="Password"
+              placeholder="Enter password"
+              type='password'
+              fullWidth required
+              onChange={(event) => setPassword(event.target.value)} />
+            <TextField
+              style={{ marginBottom: '.75rem' }}
+              label="Confirm password"
+              placeholder="Confirm password"
+              type='password'
+              fullWidth required
+              onChange={(event) => setConfirmPassword(event.target.value)} />
+            <Button
+              type='submit'
+              color='primary'
+              variant='contained'
+              fullWidth
+              style={{
+                color: '#646C79',
+                backgroundColor: '#FB9039'
+              }}>
+              SIGN IN
+            </Button>
+          </form>
+        </Paper>
+      </Grid>
     )
 }
 

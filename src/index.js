@@ -103,7 +103,7 @@ const App = () => {
                         token={token}
                         fetchRoutines={fetchRoutines} />} />
                 <Route
-                    exact path='/routines/edit-routine/:routineID'
+                    exact path='/routines/edit-routine/:routineId'
                     element={<EditRoutine
                         routines={routines}
                         token={token}

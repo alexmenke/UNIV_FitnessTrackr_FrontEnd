@@ -42,9 +42,9 @@ const Routines = ({ routines, token, fetchRoutines }) => {
             </Grid>
             {
                 routines.map((routine) => {
-                    const { name, goal, routineId, creatorName } = routine;
+                    const { name, goal, id, creatorName, activities } = routine;
                     return (
-                        <div className='routines' key={routineId}>
+                        <div className='routines' key={id}>
                             <Grid
                                 container
                                 gap={'20rem'}
@@ -58,7 +58,15 @@ const Routines = ({ routines, token, fetchRoutines }) => {
                                             <h3 className='routineName'>{name}</h3>
                                             <p className='routineInfo'>{goal}</p>
                                             <p className='routineInfo'>Created by: {creatorName}</p>
+                                            <p className='routineInfo'>activities</p>
                                         </CardContent>
+                                        <CardActions>
+                                            <Link to={`/routines/edit-routine/${id}`}>
+                                                <Button style={{ color: '#FB9039' }}>
+                                                    Edit Routine
+                                                </Button>
+                                            </Link>
+                                        </CardActions>
                                     </Card>
                                 </Paper>
                             </Grid>
