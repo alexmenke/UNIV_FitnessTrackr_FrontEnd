@@ -72,7 +72,7 @@ import {
                     </>
                   ) : (
                     <>
-                      <Link to='/register'><Button
+                      <Link to='/users/register'><Button
                         style={{
                           margin: '.10rem',
                           color: '#FB9039',
