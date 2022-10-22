@@ -23,7 +23,7 @@ import {
                 style={{ 
                   fontSize: '1.75rem',
                   color: '#FB9039' }}>
-                Stranger's Things
+                Fitness Trackr
               </Typography>
             </Grid>
             <Grid container

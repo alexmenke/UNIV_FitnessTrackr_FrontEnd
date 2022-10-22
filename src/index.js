@@ -41,8 +41,8 @@ const App = () => {
     }
 
     async function fetchRoutines() {
-        const results = await getRoutines(token)
-        setRoutines(results.data);
+        const results = await getRoutines()
+        setRoutines(results);
     }
 
     async function getMe() {
@@ -57,7 +57,7 @@ const App = () => {
 
         const results = await getUserInfo(token)
         if (results.success) {
-            setUser(results.data);
+            setUser(results);
         } else {
             console.log(results.error.message);
         }

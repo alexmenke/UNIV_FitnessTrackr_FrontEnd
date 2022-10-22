@@ -63,10 +63,11 @@ export const getRoutines = async () => {
   try {
     const response = await fetch(`${baseURL}/routines`, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }
-    })
+    });
     const results = await response.json();
+    console.log(results)
     return results;
   } catch (ex) {
     console.log('Error getting all public routines')
