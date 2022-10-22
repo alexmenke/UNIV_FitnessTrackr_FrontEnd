@@ -8,10 +8,8 @@ export const loginUser = async (username, password) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user: {
-          username,
-          password
-        }
+          username: username,
+          password: password
       })
     })
 

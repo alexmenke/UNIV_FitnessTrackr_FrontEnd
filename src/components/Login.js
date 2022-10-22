@@ -22,12 +22,12 @@ const Login = ({setToken, navigate}) => {
 
     const handleSubmit = async () => {
         const results = await loginUser(username, password);
-        if (results.success) {
-            setToken(results.data.token);
-            window.localStorage.setItem('token', results.data.token);
+        if (results.token) {
+            setToken(results.token);
+            window.localStorage.setItem('token', results.token);
             navigate('/myroutines');
         } else {
-            console.log(error.message)
+            alert('Trouble logging in, please try again.')
         }
     }
 

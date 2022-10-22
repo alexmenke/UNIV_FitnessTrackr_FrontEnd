@@ -7,7 +7,10 @@ const MyRoutines = ({user, getMe}) => {
     }, [])
 
     return (
+        <div>
         <h1>My Routines</h1>
+        </div>
+
     )
 }
 
