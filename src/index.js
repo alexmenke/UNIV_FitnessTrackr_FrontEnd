@@ -21,7 +21,6 @@ import {
     MyRoutines,
     Routines,
     Activities,
-    RoutineActivities,
     Home,
     NewRoutine,
     EditRoutine
