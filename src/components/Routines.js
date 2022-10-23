@@ -5,7 +5,6 @@ import {
     Button,
     Card,
     CardContent,
-    CardActions,
     Grid,
 } from '@mui/material';
 import styles from '../style.css';
@@ -33,7 +32,7 @@ const Routines = ({ routines, token, fetchRoutines }) => {
                 <div className='routineHeader'>
                     {token ? (
                         <Link to='/routines/new-routine'>
-                            <button>Create new routine</button>
+                            <Button style={{ color: '#FB9039' }}>Create new routine</Button>
                         </Link>
                     ) : (
                         <p><Link to='/register'>Register</Link> or <Link to='/login'>login</Link> to create a routine.</p>
@@ -58,15 +57,8 @@ const Routines = ({ routines, token, fetchRoutines }) => {
                                             <h3 className='routineName'>{name}</h3>
                                             <p className='routineInfo'>{goal}</p>
                                             <p className='routineInfo'>Created by: {creatorName}</p>
-                                            <p className='routineInfo'>activities</p>
+                                            <p className='routineInfo'>Activities: (have name, description, count/duration)</p>
                                         </CardContent>
-                                        <CardActions>
-                                            <Link to={`/routines/edit-routine/${id}`}>
-                                                <Button style={{ color: '#FB9039' }}>
-                                                    Edit Routine
-                                                </Button>
-                                            </Link>
-                                        </CardActions>
                                     </Card>
                                 </Paper>
                             </Grid>

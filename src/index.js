@@ -12,7 +12,8 @@ import {
 import './style.css';
 import {
     getRoutines,
-    getUserInfo
+    getUserInfo,
+    getMyRoutines
 } from './api/index.js';
 import {
     Navbar,
@@ -30,6 +31,7 @@ import {
 
 const App = () => {
     const [routines, setRoutines] = useState([]);
+    const [myRoutines, setMyRoutines] = useState([]);
     const [token, setToken] = useState('');
     const [user, setUser] = useState({});
     const navigate = useNavigate();
@@ -45,6 +47,11 @@ const App = () => {
         setRoutines(results);
     }
 
+    async function fetchMyRoutines(token) {
+        const results = await getMyRoutines(token)
+        setMyRoutines(results);
+    }
+
     async function getMe() {
         const storedToken = window.localStorage.getItem('token');
 
@@ -56,16 +63,20 @@ const App = () => {
         }
 
         const results = await getUserInfo(token)
-        if (results.success) {
+        if (results) {
             setUser(results);
         } else {
-            console.log(results.error.message);
+            console.log('Error setting user');
         }
     }
 
     useEffect(() => {
         fetchRoutines();
     }, [token])
+
+    useEffect(() => {
+        fetchMyRoutines(token);
+    }, [])
 
     useEffect(() => {
         getMe();
@@ -83,8 +94,9 @@ const App = () => {
                 <Route
                     path='/myroutines'
                     element={<MyRoutines
-                        user={user}
-                        getMe={getMe} />} />
+                        myRoutines={myRoutines}
+                        token={token}
+                        fetchMyRoutines={fetchMyRoutines} />} />
                 <Route
                     path='/login'
                     element={<Login
