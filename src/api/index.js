@@ -8,10 +8,8 @@ export const loginUser = async (username, password) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        user: {
-          username,
-          password
-        }
+        username: username,
+        password: password
       })
     })
 
@@ -43,13 +41,11 @@ export const registerUser = async (username, password) => {
     const response = await fetch(`${baseURL}/users/register`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        user: {
-          username: username,
-          password: password
-        }
+        username: username,
+        password: password
       })
     })
     const result = await response.json();
@@ -63,17 +59,34 @@ export const getRoutines = async () => {
   try {
     const response = await fetch(`${baseURL}/routines`, {
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       }
-    })
+    });
     const results = await response.json();
+    console.log("testing getRoutines", results)
     return results;
   } catch (ex) {
     console.log('Error getting all public routines')
   }
 }
 
-export const addNewRoutine = async (token, { name, goal, isPublic }) => {
+export const getMyRoutines = async (token) => {
+  try {
+    const response = await fetch(`${baseURL}/users/:username/routines`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    const results = response.json();
+    console.log("Testing getMyRoutines", results)
+    return results;
+  } catch (ex) {
+    console.log('Error getting your routines')
+  }
+}
+
+export const addNewRoutine = async (token, { name, goal }) => {
   try {
     const response = await fetch(`${baseURL}/routines`, {
       method: "POST",
@@ -84,7 +97,7 @@ export const addNewRoutine = async (token, { name, goal, isPublic }) => {
       body: JSON.stringify({
         name: name,
         goal: goal,
-        isPublic: isPublic
+        isPublic: true
       })
     })
     const results = response.json();
@@ -94,23 +107,9 @@ export const addNewRoutine = async (token, { name, goal, isPublic }) => {
   }
 }
 
-export const getMyRoutines = async () => {
+export const updateRoutine = async ({ name, goal, isPublic, routineId }) => {
   try {
-    const response = await fetch(`${baseURL}/users/${username}/routines`, {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-    const results = response.json();
-    return results;
-  } catch (ex) {
-    console.log('Error getting my routines')
-  }
-}
-
-export const updateRoutine = async ({ name, goal, isPublic, routineID }) => {
-  try {
-    const response = await fetch(`${baseURL}/routines/${routineID}`, {
+    const response = await fetch(`${baseURL}/routines/${routineId}`, {
       method: "PATCH",
       body: JSON.stringify({
         name: name,
@@ -141,13 +140,13 @@ export const deleteRoutine = async (token, routineId) => {
   }
 }
 
-export const addActivityToRoutine = async (routineId, {activityId, count, duration}) => {
+export const addActivityToRoutine = async (routineId, { activityId, count, duration }) => {
   try {
     const response = await fetch(`${baseURL}/routines/${routineId}/activities`, {
       method: "POST",
       body: JSON.stringify({
         activityId: activityId,
-        count: count, 
+        count: count,
         duration: duration
       })
     })

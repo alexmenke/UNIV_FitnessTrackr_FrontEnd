@@ -12,7 +12,8 @@ import {
 import './style.css';
 import {
     getRoutines,
-    getUserInfo
+    getUserInfo,
+    getMyRoutines
 } from './api/index.js';
 import {
     Navbar,
@@ -30,6 +31,7 @@ import {
 
 const App = () => {
     const [routines, setRoutines] = useState([]);
+    const [myRoutines, setMyRoutines] = useState([]);
     const [token, setToken] = useState('');
     const [user, setUser] = useState({});
     const navigate = useNavigate();
@@ -41,8 +43,13 @@ const App = () => {
     }
 
     async function fetchRoutines() {
-        const results = await getRoutines(token)
-        setRoutines(results.data);
+        const results = await getRoutines()
+        setRoutines(results);
+    }
+
+    async function fetchMyRoutines(token) {
+        const results = await getMyRoutines(token)
+        setMyRoutines(results);
     }
 
     async function getMe() {
@@ -56,16 +63,20 @@ const App = () => {
         }
 
         const results = await getUserInfo(token)
-        if (results.success) {
-            setUser(results.data);
+        if (results) {
+            setUser(results);
         } else {
-            console.log(results.error.message);
+            console.log('Error setting user');
         }
     }
 
     useEffect(() => {
         fetchRoutines();
     }, [token])
+
+    useEffect(() => {
+        fetchMyRoutines(token);
+    }, [])
 
     useEffect(() => {
         getMe();
@@ -83,15 +94,16 @@ const App = () => {
                 <Route
                     path='/myroutines'
                     element={<MyRoutines
-                        user={user}
-                        getMe={getMe} />} />
+                        myRoutines={myRoutines}
+                        token={token}
+                        fetchMyRoutines={fetchMyRoutines} />} />
                 <Route
                     path='/login'
                     element={<Login
                         setToken={setToken}
                         navigate={navigate} />} />
                 <Route
-                    path='/register'
+                    path='/users/register'
                     element={<Register
                         setToken={setToken}
                         token={token}
@@ -103,7 +115,7 @@ const App = () => {
                         token={token}
                         fetchRoutines={fetchRoutines} />} />
                 <Route
-                    exact path='/routines/edit-routine/:routineID'
+                    exact path='/routines/edit-routine/:routineId'
                     element={<EditRoutine
                         routines={routines}
                         token={token}
