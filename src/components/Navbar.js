@@ -9,6 +9,7 @@ import {
     Grid,
     Button,
   } from '@mui/material';
+  import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
   
   const Navbar = ({ logout, token }) => {
     return (
@@ -23,8 +24,9 @@ import {
                 style={{ 
                   fontSize: '1.75rem',
                   color: '#FB9039' }}>
-                Stranger's Things
+                Fitness Trackr
               </Typography>
+              <FitnessCenterIcon />
             </Grid>
             <Grid container
               display="flex"
@@ -52,6 +54,7 @@ import {
                   }}>
                   Activities
                 </Button></Link>
+                
                 <Link to='/login'><Button
                   style={{
                     margin: '.10rem',
@@ -69,13 +72,7 @@ import {
                         }}>
                         My Routines
                       </Button></Link>
-                      <Link to='/' onClick={() => logout()}><Button
-                        style={{
-                          margin: '.10rem',
-                          color: '#FB9039',
-                        }}>
-                        Logout
-                      </Button></Link>
+
                     </>
                   ) : (
                     <>
@@ -85,13 +82,6 @@ import {
                           color: '#FB9039',
                         }}>
                         New Account
-                      </Button></Link>
-                      <Link to='/login'><Button
-                        style={{
-                          margin: '.10rem',
-                          color: '#FB9039',
-                        }}>
-                        Sign In
                       </Button></Link>
                     </>
                   )
@@ -105,19 +95,5 @@ import {
   }
 
 
-// const Navbar = ({ logout, token }) => {
-//     return (
-//         <header>
-//             <nav className="navbar">
-//                 <Link to='/' className="navLinks">Home</Link>
-//                 <Link to='/login' className="navLinks">Login</Link>
-//                 <Link to='/register' className="navLinks">Register</Link>
-//                 <Link to='/routines' className="navLinks">Routines</Link>
-//                 <Link to='/activities' className="navLinks">Activities</Link>
-//                 <Link to='/myroutines' className="navLinks">My Routines</Link>
-//             </nav>
-//         </header>
-//     )
-// }
 
 export default Navbar;
