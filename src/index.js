@@ -13,7 +13,8 @@ import './style.css';
 import {
     getRoutines,
     getUserInfo,
-    getMyRoutines
+    getMyRoutines,
+    getActivities
 } from './api/index.js';
 import {
     Navbar,
@@ -31,6 +32,7 @@ import {
 
 const App = () => {
     const [routines, setRoutines] = useState([]);
+    const [activities, setActivities] = useState([]);
     const [myRoutines, setMyRoutines] = useState([]);
     const [token, setToken] = useState('');
     const [user, setUser] = useState({});
@@ -50,6 +52,11 @@ const App = () => {
     async function fetchMyRoutines(token) {
         const results = await getMyRoutines(token)
         setMyRoutines(results);
+    }
+
+    async function fetchActivities() {
+        const results = await getActivities()
+        setActivities(results);
     }
 
     async function getMe() {
@@ -77,6 +84,10 @@ const App = () => {
     useEffect(() => {
         fetchMyRoutines(token);
     }, [])
+
+    useEffect(() => {
+        fetchActivities();
+    }, [token])
 
     useEffect(() => {
         getMe();
@@ -128,7 +139,10 @@ const App = () => {
                         fetchRoutines={fetchRoutines} />} />
                 <Route 
                     path='/activities' 
-                    element={<Activities />} />
+                    element={<Activities
+                        activities={activities}
+                        token={token}
+                        fetchActivities={fetchActivities}/>} />
             </Routes>
         </div>
 

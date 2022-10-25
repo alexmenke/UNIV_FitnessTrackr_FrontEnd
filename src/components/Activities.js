@@ -1,111 +1,38 @@
-import { React, useEffect, useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-const Activities = (props) => {
-  const [returnedActivity, setReturnedActivity] = useState([]);
-  const [activityName, setActivityName] = useState("");
-  const [activityDescription, setActivityDescription] = useState("");
-
-  const token = props.token;
-
-  const patchActivity = async (activityId) => {
-    const patch = await fetch(
-      `http://fitnesstrac-kr.herokuapp.com/api/activities/${activityId}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: activityName,
-          description: activityDescription,
-        }),
-      }
-    );
-    setActivityName("");
-    setActivityDescription("");
-    getActivities();
-  };
-
-  const newActivity = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      "http://fitnesstrac-kr.herokuapp.com/api/activities",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          name: activityName,
-          description: activityDescription,
-        }),
-      }
-    );
-    setActivityName("");
-    setActivityDescription("");
-    getActivities();
-  };
-  const getActivities = async () => {
-    const response = await fetch(
-      "http://fitnesstrac-kr.herokuapp.com/api/activities",
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const info = await response.json();
-    setReturnedActivity(info);
-  };
-  useEffect(() => {
-    getActivities();
-  }, []);
-  return (
-    <>
-      {" "}
-      <body>
+const Activities = ({ activities, token, fetchActivities }) => {
+    useEffect(() => {
+        fetchActivities();
+    }, [token])
+    return (
         <div>
-          {props.user && (
-            <h1>
-              Welcome to Activities, {props.user.username}
-            </h1>
-          )}
-        </div>
-        <>
-          {" "}
-          <div id="form">
-            <form onSubmit={newActivity}>
-              <input
-                onChange={(e) => setActivityName(e.target.value)}
-                type="text"
-                value={activityName}
-                placeholder="Activity Name"
-              />
-              <br></br>
+                <div>
+                    {token ? (
+                        <Link to='/activities/new-activity'>
+                            <button>Create new Activities</button>
+                        </Link>
+                    ) : (
+                        <p><Link to='/register'>Register</Link> or <Link to='/login'>Login</Link> to create an activitiy.</p>
+                    )}
+                </div>
+            {
+                activities.map((activitiy) => {
+                    const { name, goal, id, creatorName, activities } = activitiy;
+                    return (
+                        <div key={id}>
+                                            <h3 className='routineName'>{name}</h3>
+                                            <p className='routineInfo'>{goal}</p>
+                                            <p className='routineInfo'>Created by: {creatorName}</p>
+                                            <p className='routineInfo'>Activities: (have name, description, count/duration)</p>
+                            
+                        </div>
+                    )
+                })
+            }
 
-              <input
-                onChange={(e) => setActivityDescription(e.target.value)}
-                type="text"
-                value={activityDescription}
-                placeholder="Activity Description"
-              />
-              <br></br>
-              <button type="submit">Add Activity</button>
-            </form>
-          </div>
-        </>
-        {returnedActivity.map((activity) => {
-          return (
-            <div>
-              <h1>{activity.name}</h1>
-              <h3>Description: {activity.description}</h3>
-            </div>
-          );
-        })}
-      </body>
-    </>
-  );
-};
+        </div>
+    )
+}
+
 export default Activities;
