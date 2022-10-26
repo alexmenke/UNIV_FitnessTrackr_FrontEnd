@@ -91,11 +91,12 @@ export const addNewRoutine = async (token, { name, goal, isPublic }) => {
   }
 }
 
-export const getMyRoutines = async () => {
+export const getMyRoutines = async (token, { user }) => {
   try {
-    const response = await fetch(`${baseURL}/users/${username}/routines`, {
+    const response = await fetch(`${baseURL}/users/${user}/routines`, {
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       }
     })
     const results = response.json();

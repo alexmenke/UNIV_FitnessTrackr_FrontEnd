@@ -36,13 +36,13 @@ const App = () => {
     const [activities, setActivities] = useState([]);
     const [myRoutines, setMyRoutines] = useState([]);
     const [token, setToken] = useState('');
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState('');
     const navigate = useNavigate();
 
     function logout() {
         window.localStorage.removeItem('token');
         setToken('');
-        setUser({});
+        setUser('');
     }
 
     async function fetchRoutines() {
@@ -50,8 +50,12 @@ const App = () => {
         setRoutines(results);
     }
 
-    async function fetchMyRoutines(token) {
-        const results = await getMyRoutines(token)
+    async function fetchMyRoutines(token, user) {
+        // getMe()
+        // const username = user.username
+        const results = await getMyRoutines(token, user)
+        console.log('testing myRoutines', results)
+        console.log("testing username", user)
         setMyRoutines(results);
     }
 
@@ -70,9 +74,10 @@ const App = () => {
             return;
         }
 
-        const results = await getUserInfo(token)
-        if (results) {
-            setUser(results);
+        const {username} = await getUserInfo(token)
+        if ({username}) {
+            console.log(username)
+            setUser(username);
         } else {
             console.log('Error setting user');
         }
@@ -80,17 +85,8 @@ const App = () => {
 
     useEffect(() => {
         fetchRoutines();
-    }, [token])
-
-    useEffect(() => {
-        fetchMyRoutines(token);
-    }, [])
-
-    useEffect(() => {
+        fetchMyRoutines();
         fetchActivities();
-    }, [token])
-
-    useEffect(() => {
         getMe();
     }, [token])
 
