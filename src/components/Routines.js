@@ -57,7 +57,16 @@ const Routines = ({ routines, token, fetchRoutines }) => {
                                             <h3 className='routineName'>{name}</h3>
                                             <p className='routineInfo'>{goal}</p>
                                             <p className='routineInfo'>Created by: {creatorName}</p>
-                                            <p className='routineInfo'>[activities]</p>
+                                            <div> {routine.activities.map((activity, index) => {
+                                                    return (
+                                                        <>
+                                                            <h5> {index + 1}. Activity : {activity.name} </h5>
+                                                            <h6> Description: {activity.description} </h6>
+                                                            <h6> Duration: {activity.duration} Minutes </h6>
+                                                            <h6> Count : {activity.count} Reps </h6>
+                                                        </>)
+                                                })}
+                                            </div>   
                                         </CardContent>
                                     </Card>
                                 </Paper>
