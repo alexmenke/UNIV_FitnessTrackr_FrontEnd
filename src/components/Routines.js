@@ -57,7 +57,7 @@ const Routines = ({ routines, token, fetchRoutines }) => {
                                             <h3 className='routineName'>{name}</h3>
                                             <p className='routineInfo'>{goal}</p>
                                             <p className='routineInfo'>Created by: {creatorName}</p>
-                                            <p className='routineInfo'>Activities: (have name, description, count/duration)</p>
+                                            <p className='routineInfo'>[activities]</p>
                                         </CardContent>
                                     </Card>
                                 </Paper>

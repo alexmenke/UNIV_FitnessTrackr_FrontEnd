@@ -3,11 +3,11 @@ import React, {
     useEffect
 } from 'react';
 import ReactDOM from 'react-dom/client';
-import { 
-    Route, 
-    BrowserRouter, 
-    Routes, 
-    useNavigate 
+import {
+    Route,
+    BrowserRouter,
+    Routes,
+    useNavigate
 } from 'react-router-dom';
 import './style.css';
 import {
@@ -25,7 +25,8 @@ import {
     Activities,
     Home,
     NewRoutine,
-    EditRoutine
+    EditRoutine,
+    NewActivity
 } from './components'
 
 
@@ -95,7 +96,7 @@ const App = () => {
 
     return (
         <div>
-            <Navbar 
+            <Navbar
                 logout={logout}
                 token={token} />
             <Routes>
@@ -137,12 +138,18 @@ const App = () => {
                         token={token}
                         navigate={navigate}
                         fetchRoutines={fetchRoutines} />} />
-                <Route 
-                    path='/activities' 
+                <Route
+                    path='/activities'
                     element={<Activities
                         activities={activities}
                         token={token}
-                        fetchActivities={fetchActivities}/>} />
+                        fetchActivities={fetchActivities} />} />
+                <Route
+                    path='/activities/new-activity'
+                    element={<NewActivity
+                        token={token}
+                        fetchActivities={fetchActivities}
+                        navigate={navigate} />} />
             </Routes>
         </div>
 
