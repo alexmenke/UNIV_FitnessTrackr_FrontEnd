@@ -12,7 +12,7 @@ const NewRoutine = ({ token, navigate, fetchRoutines }) => {
     const [goal, setGoal] = useState('');
 
     const addRoutine = async () => {
-        const results = await addNewRoutine(token, { name, goal });
+        const results = await addNewRoutine(token, { name, goal, isPublic: true });
         console.log("testing addroutine", results)
         if (results.success) {
             fetchRoutines();

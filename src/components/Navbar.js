@@ -100,6 +100,4 @@ const Navbar = ({ logout, token }) => {
   )
 }
 
-
-
 export default Navbar;

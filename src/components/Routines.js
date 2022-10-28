@@ -43,14 +43,15 @@ const Routines = ({ routines, token, fetchRoutines }) => {
                 routines.map((routine) => {
                     const { name, goal, id, creatorName, activities } = routine;
                     return (
-                        <div className='routines' key={id}>
+                        <div className='routines'>
                             <Grid
                                 container
                                 gap={'20rem'}
                                 direction='row'
                                 alignItems='flex-start'
                                 justifyContent='center'
-                                justify='flex-start'>
+                                justify='flex-start'
+                                key={id}>
                                 <Paper elevation={10} style={paperStyle}>
                                     <Card className={styles.singleRoutine}>
                                         <CardContent>
@@ -75,7 +76,6 @@ const Routines = ({ routines, token, fetchRoutines }) => {
                     )
                 })
             }
-
         </div>
     )
 }

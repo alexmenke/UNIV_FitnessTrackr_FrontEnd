@@ -10,9 +10,11 @@ import {
 const NewActivity = ({ token, navigate, fetchActivities }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [count, setCount] = useState('');
+    const [duration, setDuration] = useState('');
 
     const addActivity = async () => {
-        const results = await createActivity(token, { name, description });
+        const results = await createActivity(token, { name, description, count, duration });
         console.log("testing addactivity", results)
         if (results.success) {
             fetchActivities();
@@ -26,7 +28,7 @@ const NewActivity = ({ token, navigate, fetchActivities }) => {
         padding: 20,
         width: 300,
         margin: '20px auto'
-      }
+    }
 
     return (
         <Grid>
@@ -51,6 +53,19 @@ const NewActivity = ({ token, navigate, fetchActivities }) => {
                         placeholder="Enter description"
                         fullWidth required
                         onChange={(event) => setDescription(event.target.value)} />
+                    <TextField
+                        style={{ marginBottom: '.75rem' }}
+                        label="Count"
+                        placeholder="Enter count"
+                        fullWidth required
+                        onChange={(event) => setCount(event.target.value)} />
+                    <TextField
+                        style={{ marginBottom: '.75rem' }}
+                        label="Duration"
+                        placeholder="Enter duration"
+                        fullWidth required
+                        onChange={(event) => setDuration(event.target.value)} />
+
                     <Button
                         onClick={async () => addActivity()}
                         style={{

@@ -81,7 +81,7 @@ export const addNewRoutine = async (token, { name, goal, isPublic }) => {
       body: JSON.stringify({
         name: name,
         goal: goal,
-        isPublic: true,
+        isPublic: isPublic,
       })
     })
     const results = response.json();
@@ -106,10 +106,14 @@ export const getMyRoutines = async (token, user) => {
   }
 }
 
-export const updateRoutine = async ({ name, goal, isPublic, routineId }) => {
+export const updateRoutine = async ({token, name, goal, isPublic, routineId }) => {
   try {
     const response = await fetch(`${baseURL}/routines/${routineId}`, {
       method: "PATCH",
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
       body: JSON.stringify({
         name: name,
         goal: goal,
@@ -117,6 +121,7 @@ export const updateRoutine = async ({ name, goal, isPublic, routineId }) => {
       })
     })
     const results = response.json();
+    console.log('testing updateRoutine', results)
     return results
   } catch (ex) {
     console.log('Error updating routine.')
@@ -169,7 +174,7 @@ export const getActivities = async () => {
   }
 }
 
-export const createActivity = async (token, name, description) => {
+export const createActivity = async (token, name, description, count, duration) => {
   try {
       const response = await fetch(`${baseURL}/activities`, {
           method: "POST",
@@ -178,8 +183,10 @@ export const createActivity = async (token, name, description) => {
             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
-              name, 
-              description,
+              name: name, 
+              description: description,
+              count: count,
+              duration: duration
           })
       })
       const result = await response.json();
@@ -189,7 +196,7 @@ export const createActivity = async (token, name, description) => {
   }
 }
 
-export const updateActivity = async (token, activityId, name, description) => {
+export const updateActivity = async (token, activityId, name, description, count, duration) => {
   try {
       const response = await fetch(`${baseURL}/activities/${activityId}`, {
           method: "PATCH",
@@ -198,8 +205,10 @@ export const updateActivity = async (token, activityId, name, description) => {
             'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
-              name,
-              description,
+              name: name,
+              description: description,
+              count: count, 
+              duration: duration
           })
       })
       const result = await response.json();

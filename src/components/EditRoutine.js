@@ -9,9 +9,12 @@ import {
 } from '@mui/material'
 
 const EditRoutine = ({ routines, token, fetchRoutines }) => {
-    const { id } = useParams();
-    const [currentRoutine] = routines.filter(routine => routine.id === id);
-    console.log('testing editRoutine', currentRoutine)
+    const { routineId } = useParams();
+    const [currentRoutine] = routines.filter(routine => routine.id === parseInt(routineId));
+    if (currentRoutine === undefined) {
+        return null;
+    }
+
     const { name, goal, isPublic } = currentRoutine;
 
     const [newName, setNewName] = useState(name);
@@ -26,9 +29,9 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
             name: newName,
             goal: newGoal,
             isPublic: newIsPublic,
-            id: id
+            routineId
         }
-        await updateRoutine(updatedRoutine)
+        const results = await updateRoutine(updatedRoutine);
     }
 
 

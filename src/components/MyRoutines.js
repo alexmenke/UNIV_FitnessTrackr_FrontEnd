@@ -45,10 +45,11 @@ const MyRoutines = ({ myRoutines, token, fetchMyRoutines }) => {
                                         <CardContent>
                                             <h3 className='routineName'>{name}</h3>
                                             <p className='routineInfo'>{goal}</p>
-                                            <div> {routine.activities.map((activity, index) => {
+                                            <div> 
+                                                {routine.activities.map((activity, index) => {
                                                     return (
                                                         <>
-                                                            <h5> {index + 1}. Activity : {activity.name} </h5>
+                                                            <h5> {index + 1}. Activity: {activity.name} </h5>
                                                             <h6> Description: {activity.description} </h6>
                                                             <h6> Duration: {activity.duration} Minutes </h6>
                                                             <h6> Count : {activity.count} Reps </h6>
