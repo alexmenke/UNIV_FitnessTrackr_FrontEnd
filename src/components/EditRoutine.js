@@ -11,6 +11,7 @@ import {
 const EditRoutine = ({ routines, token, fetchRoutines }) => {
     const { id } = useParams();
     const [currentRoutine] = routines.filter(routine => routine.id === id);
+    console.log('testing editRoutine', currentRoutine)
     const { name, goal, isPublic } = currentRoutine;
 
     const [newName, setNewName] = useState(name);
@@ -49,6 +50,7 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
                     <Grid
                         align='center'
                         className='editRoutineHeading'>
+                            <h2>Edit Routine</h2>
                     </Grid>
                     <TextField
                         style={{ marginBottom: '.75rem' }}

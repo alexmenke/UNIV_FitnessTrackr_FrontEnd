@@ -29,8 +29,6 @@ import {
     NewActivity
 } from './components'
 
-
-
 const App = () => {
     const [routines, setRoutines] = useState([]);
     const [activities, setActivities] = useState([]);
@@ -51,12 +49,10 @@ const App = () => {
     }
 
     async function fetchMyRoutines() {
-        // getMe()
-        // const username = user.username
         if (user) {
             const results = await getMyRoutines(token, user)
-            console.log('testing myRoutines', results)
-            console.log("testing username", user)
+            // console.log('testing myRoutines', results)
+            // console.log("testing username", user)
             setMyRoutines(results);
         }
     }
@@ -78,7 +74,7 @@ const App = () => {
         
         const {username} = await getUserInfo(token)
         if ({username}) {
-            console.log("FROM GETME", username)
+            // console.log("FROM GETME", username)
             setUser(username);
         } else {
             console.log('Error setting user');
@@ -146,7 +142,7 @@ const App = () => {
                         token={token}
                         fetchActivities={fetchActivities} />} />
                 <Route
-                    path='/activities/new-activity'
+                    exact path='/activities/new-activity'
                     element={<NewActivity
                         token={token}
                         fetchActivities={fetchActivities}
