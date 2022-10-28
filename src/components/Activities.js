@@ -31,7 +31,7 @@ const Activities = ({ activities, token, fetchActivities }) => {
                 justify='flex-start'>
                 <div className='activityHeader'>
                     {token ? (
-                        <Link to='/routines/new-activity'>
+                        <Link to='/activities/new-activity'>
                             <Button style={{ color: '#FB9039' }}>Create new activity</Button>
                         </Link>
                     ) : (
