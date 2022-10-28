@@ -50,13 +50,15 @@ const App = () => {
         setRoutines(results);
     }
 
-    async function fetchMyRoutines(token, user) {
+    async function fetchMyRoutines() {
         // getMe()
         // const username = user.username
-        const results = await getMyRoutines(token, user)
-        console.log('testing myRoutines', results)
-        console.log("testing username", user)
-        setMyRoutines(results);
+        if (user) {
+            const results = await getMyRoutines(token, user)
+            console.log('testing myRoutines', results)
+            console.log("testing username", user)
+            setMyRoutines(results);
+        }
     }
 
     async function fetchActivities() {
@@ -66,17 +68,17 @@ const App = () => {
 
     async function getMe() {
         const storedToken = window.localStorage.getItem('token');
-
+        
         if (!token) {
             if (storedToken) {
                 setToken(storedToken);
             }
             return;
         }
-
+        
         const {username} = await getUserInfo(token)
         if ({username}) {
-            console.log(username)
+            console.log("FROM GETME", username)
             setUser(username);
         } else {
             console.log('Error setting user');
@@ -85,10 +87,13 @@ const App = () => {
 
     useEffect(() => {
         fetchRoutines();
-        fetchMyRoutines();
         fetchActivities();
         getMe();
     }, [token])
+
+    useEffect(() => {
+        fetchMyRoutines();
+    }, [token, user])
 
     return (
         <div>

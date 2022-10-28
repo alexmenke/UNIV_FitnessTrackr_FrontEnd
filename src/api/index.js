@@ -91,7 +91,7 @@ export const addNewRoutine = async (token, { name, goal, isPublic }) => {
   }
 }
 
-export const getMyRoutines = async (token, { user }) => {
+export const getMyRoutines = async (token, user) => {
   try {
     const response = await fetch(`${baseURL}/users/${user}/routines`, {
       headers: {
