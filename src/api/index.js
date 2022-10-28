@@ -81,7 +81,7 @@ export const addNewRoutine = async (token, { name, goal, isPublic }) => {
       body: JSON.stringify({
         name: name,
         goal: goal,
-        isPublic: isPublic
+        isPublic: true,
       })
     })
     const results = response.json();
