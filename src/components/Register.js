@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { registerUser } from '../api';
+import {
+  Grid,
+  Paper,
+  TextField,
+  Button
+} from '@mui/material'
 
 const Register = ({ setToken, navigate }) => {
 
@@ -21,38 +27,66 @@ const Register = ({ setToken, navigate }) => {
     }
   }
 
+  const paperStyle = {
+    padding: 20,
+    width: 300,
+    margin: '20px auto'
+  }
+
   return (
-    <>
-      <h1>Register</h1>
-      <form onSubmit={(event) => {
-        event.preventDefault();
-        handleSubmit();
-      }}>
-        <input
-        type='text'
-        label='Enter Username'
-        minLength={4}
-        placeholder="Enter Username"
-        required
-        onChange={(event) => setUsername(event.target.value)}
-      />
-        <input
-          type='password'
-          label='Enter Password'
-          minLength={4}
-          placeholder="Enter Password"
-          required
-          onChange={(event) => setPassword(event.target.value)} />
-        <input
-          type='password'
-          label='Confirm Password'
-          minLength={4}
-          placeholder="Confirm Password"
-          required
-          onChange={(event) => setConfirmPassword(event.target.value)} />
-        <button variant='contained' type='submit'>Submit</button>
-      </form>
-    </>
+    <Grid>
+        <Paper elevation={10} style={paperStyle}>
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          handleSubmit();
+        }}>
+          <Grid
+            align='center'
+            className='loginAndRegisterHeading'>
+            <h2>Register</h2>
+          </Grid>
+          <TextField
+            style={{ marginBottom: '.75rem' }}
+            type='text'
+            label='Enter Username'
+            minLength={4}
+            fullWidth
+            placeholder="Enter Username"
+            required
+            onChange={(event) => setUsername(event.target.value)}
+          />
+          <TextField
+            style={{ marginBottom: '.75rem' }}
+            type='password'
+            label='Enter Password'
+            minLength={4}
+            fullWidth
+            placeholder="Enter Password"
+            required
+            onChange={(event) => setPassword(event.target.value)} />
+          <TextField
+            style={{ marginBottom: '.75rem' }}
+            type='password'
+            label='Confirm Password'
+            minLength={4}
+            fullWidth
+            placeholder="Confirm Password"
+            required
+            onChange={(event) => setConfirmPassword(event.target.value)} />
+          <Button
+            type='submit'
+            color='primary'
+            variant='contained'
+            fullWidth
+            style={{
+              color: '#646C79',
+              backgroundColor: '#FB9039'
+            }}>
+            Register
+          </Button>
+        </form>
+      </Paper>
+    </Grid>
   )
 }
 
