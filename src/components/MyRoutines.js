@@ -78,7 +78,6 @@ const MyRoutines = ({ myRoutines, token, fetchMyRoutines }) => {
                 })
             }
         </div>
-
     )
 }
 

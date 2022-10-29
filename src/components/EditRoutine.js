@@ -49,7 +49,6 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
         const results = await updateActivity(updatedActivity)
     }
 
-
     const paperStyle = {
         padding: 20,
         width: 300,
