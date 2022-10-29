@@ -28,20 +28,29 @@ const Register = ({ setToken, navigate }) => {
         event.preventDefault();
         handleSubmit();
       }}>
-        <input style={{ margin: '.25rem', width: '100%', backgroundColor: 'lightGrey' }}
+        <input
         type='text'
         label='Enter Username'
+        minLength={4}
+        placeholder="Enter Username"
+        required
         onChange={(event) => setUsername(event.target.value)}
       />
-        <input style={{ margin: '.25rem', width: '100%', backgroundColor: 'lightGrey' }}
+        <input
           type='password'
-          label='Enter Password*'
+          label='Enter Password'
+          minLength={4}
+          placeholder="Enter Password"
+          required
           onChange={(event) => setPassword(event.target.value)} />
-        <input style={{ margin: '.25rem', width: '100%', backgroundColor: 'lightGrey' }}
+        <input
           type='password'
           label='Confirm Password'
+          minLength={4}
+          placeholder="Confirm Password"
+          required
           onChange={(event) => setConfirmPassword(event.target.value)} />
-        <button style={{ height: '3rem', margin: '.25rem', backgroundColor:'#24a6d1' }} variant='contained' type='submit'>Submit</button>
+        <button variant='contained' type='submit'>Submit</button>
       </form>
     </>
   )
