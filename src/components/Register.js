@@ -50,8 +50,7 @@ const Register = ({ setToken, navigate }) => {
             type='text'
             label='Enter Username'
             inputProps={{
-              minLength: 3,
-              maxLength: 15
+              pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}'
             }}
             fullWidth
             placeholder="Enter Username"
@@ -82,6 +81,13 @@ const Register = ({ setToken, navigate }) => {
             placeholder="Confirm Password"
             required
             onChange={(event) => setConfirmPassword(event.target.value)} />
+          <h4>Password Requirements:</h4>
+            <ul>
+                <li>Between 8 and 16 characters</li>
+                <li>A capital letter</li>
+                <li>A lowercase letter</li>
+                <li>A number</li>
+            </ul>
           <Button
             type='submit'
             color='primary'
