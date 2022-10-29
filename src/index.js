@@ -26,7 +26,8 @@ import {
     Home,
     NewRoutine,
     EditRoutine,
-    NewActivity
+    NewActivity,
+    EditActivity
 } from './components'
 
 const App = () => {
@@ -112,7 +113,7 @@ const App = () => {
                         setToken={setToken}
                         navigate={navigate} />} />
                 <Route
-                    path='/users/register'
+                    path='/register'
                     element={<Register
                         setToken={setToken}
                         token={token}
@@ -128,7 +129,9 @@ const App = () => {
                     element={<EditRoutine
                         routines={routines}
                         token={token}
-                        fetchRoutines={fetchRoutines} />} />
+                        fetchRoutines={fetchRoutines}
+                        fetchActivities={fetchActivities}
+                        activities={activities} />} />
                 <Route
                     exact path='/routines/new-routine'
                     element={<NewRoutine
@@ -147,6 +150,12 @@ const App = () => {
                         token={token}
                         fetchActivities={fetchActivities}
                         navigate={navigate} />} />
+                <Route
+                    exact path='/activities/edit-activity/:activityId'
+                    element={<EditActivity
+                        activities={activities}
+                        token={token}
+                        fetchActivities={fetchActivities} />} />
             </Routes>
         </div>
 

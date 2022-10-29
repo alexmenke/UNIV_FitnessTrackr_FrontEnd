@@ -1,47 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { updateRoutine, addActivityToRoutine, updateActivity } from '../api';
+import { updateActivity } from '../api';
 import {
     Grid,
     Paper,
     TextField,
     Button,
-    Checkbox,
-    Select
 } from '@mui/material'
 
-// const AddActivityToRoutine = (activities, token, fetchActivities) => {
-//     const [newActivity, setNewActivity] = useState(activities);
-
-//     async function addActivity() {
-//         const response = await addActivityToRoutine()
-//     }
-// }
-
-const EditRoutine = ({ routines, token, fetchRoutines }) => {
-    const { routineId } = useParams();
-    const [currentRoutine] = routines.filter(routine => routine.id === parseInt(routineId));
-    if (currentRoutine === undefined) {
+const EditActivity = ({ activities, token, fetchActivities }) => {
+    const { activityId } = useParams();
+    const [currentActivity] = activities.filter(activity => activity.id === parseInt(activityId));
+    if (currentActivity === undefined) {
         return null;
     }
 
-    const { name, goal, isPublic } = currentRoutine;
+    const { name, description } = currentActivity;
 
     const [newName, setNewName] = useState(name);
-    const [newGoal, setNewGoal] = useState(goal);
-    const [newIsPublic, setNewIsPublic] = useState(isPublic);
+    const [newDescription, setNewDescription] = useState(description);
 
     const navigate = useNavigate();
 
-    async function editRoutine() {
-        const updatedRoutine = {
+    async function editActivity() {
+        const updatedActivity = {
             token: token,
             name: newName,
-            goal: newGoal,
-            isPublic: newIsPublic,
-            routineId
+            description: newDescription,
+            activityId
         }
-        const results = await updateRoutine(updatedRoutine);
+        const results = await updateActivity(updatedActivity)
     }
 
     const paperStyle = {
@@ -55,15 +43,13 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
             <Paper elevation={10} style={paperStyle}>
                 <form onSubmit={(event) => {
                     event.preventDefault();
-                    editRoutine();
-                    addActivityToRoutine();
-                    fetchRoutines();
-                    navigate('/routines');
+                    editActivity();
+                    navigate('/activities');
                 }}>
                     <Grid
                         align='center'
                         className='editRoutineHeading'>
-                        <h2>Edit Routine</h2>
+                        <h2>Edit Activity</h2>
                     </Grid>
                     <TextField
                         style={{ marginBottom: '.75rem' }}
@@ -73,14 +59,10 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
                         onChange={(event) => setNewName(event.target.value)} />
                     <TextField
                         style={{ marginBottom: '.75rem' }}
-                        label='Goal'
-                        placeholder={goal}
+                        label='Description'
+                        placeholder={description}
                         fullWidth required
-                        onChange={(event) => setNewGoal(event.target.value)} />
-                    <Checkbox
-                        style={{ marginBottom: '.75rem' }}
-                        label='Public'
-                        onChange={(event) => setNewIsPublic(event.target.value)} />
+                        onChange={(event) => setNewDescription(event.target.value)} />
                     <Button
                         type='submit'
                         color='primary'
@@ -99,4 +81,4 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
     )
 }
 
-export default EditRoutine;
+export default EditActivity;

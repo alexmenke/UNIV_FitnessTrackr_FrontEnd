@@ -8,4 +8,5 @@ export { default as NewActivity } from './NewActivity';
 export { default as Home } from './Home';
 export { default as NewRoutine } from './NewRoutine';
 export { default as EditRoutine } from './EditRoutine';
+export { default as EditActivity } from './EditActivity';
 

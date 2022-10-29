@@ -6,6 +6,7 @@ import {
     Card,
     CardContent,
     Grid,
+    CardActions
 } from '@mui/material';
 import styles from '../style.css';
 
@@ -21,7 +22,7 @@ const Activities = ({ activities, token, fetchActivities }) => {
     }, [token])
 
     return (
-<div className='activityContainer'>
+        <div className='activityContainer'>
             <Grid
                 container
                 gap={'2rem'}
@@ -57,6 +58,14 @@ const Activities = ({ activities, token, fetchActivities }) => {
                                             <h3 className='activityName'>{name}</h3>
                                             <p className='activitiyInfo'>{description}</p>
                                         </CardContent>
+                                        <CardActions>
+                                            <Link to={`/activities/edit-activity/${id}`}>
+                                                <Button
+                                                    style={{ color: '#FB9039' }}>
+                                                    Edit Activity
+                                                </Button>
+                                            </Link>
+                                        </CardActions>
                                     </Card>
                                 </Paper>
                             </Grid>

@@ -196,7 +196,7 @@ export const createActivity = async ({token, name, description, count, duration}
   }
 }
 
-export const updateActivity = async (token, activityId, name, description, count, duration) => {
+export const updateActivity = async ({token, activityId, name, description}) => {
   try {
       const response = await fetch(`${baseURL}/activities/${activityId}`, {
           method: "PATCH",
@@ -207,8 +207,6 @@ export const updateActivity = async (token, activityId, name, description, count
           body: JSON.stringify({
               name: name,
               description: description,
-              count: count, 
-              duration: duration
           })
       })
       const result = await response.json();
