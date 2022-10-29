@@ -49,7 +49,10 @@ const Register = ({ setToken, navigate }) => {
             style={{ marginBottom: '.75rem' }}
             type='text'
             label='Enter Username'
-            minLength={4}
+            inputProps={{
+              minLength: 3,
+              maxLength: 15
+            }}
             fullWidth
             placeholder="Enter Username"
             required
@@ -59,7 +62,10 @@ const Register = ({ setToken, navigate }) => {
             style={{ marginBottom: '.75rem' }}
             type='password'
             label='Enter Password'
-            minLength={4}
+            inputProps={{
+              minLength: 8,
+              maxLength: 20
+            }}
             fullWidth
             placeholder="Enter Password"
             required
@@ -68,7 +74,10 @@ const Register = ({ setToken, navigate }) => {
             style={{ marginBottom: '.75rem' }}
             type='password'
             label='Confirm Password'
-            minLength={4}
+            inputProps={{
+              minLength: 8,
+              maxLength: 20
+            }}
             fullWidth
             placeholder="Confirm Password"
             required
