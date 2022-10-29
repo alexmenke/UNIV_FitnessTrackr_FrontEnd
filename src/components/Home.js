@@ -41,6 +41,7 @@ const Home = () => {
           </Card>
         </Paper>
       </div>
+      
     )
 }
 
