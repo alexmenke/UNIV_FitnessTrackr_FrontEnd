@@ -113,7 +113,7 @@ const App = () => {
                         setToken={setToken}
                         navigate={navigate} />} />
                 <Route
-                    path='/register'
+                    path='/users/register'
                     element={<Register
                         setToken={setToken}
                         token={token}
