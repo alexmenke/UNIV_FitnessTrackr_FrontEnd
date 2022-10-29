@@ -23,7 +23,7 @@ const Register = ({ setToken, navigate }) => {
       window.localStorage.setItem('token', results.token)
       navigate('/')
     } else {
-      console.log('error during handlSubmit Register')
+      alert('That username is taken')
     }
   }
 
@@ -49,9 +49,6 @@ const Register = ({ setToken, navigate }) => {
             style={{ marginBottom: '.75rem' }}
             type='text'
             label='Enter Username'
-            inputProps={{
-              pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}'
-            }}
             fullWidth
             placeholder="Enter Username"
             required
@@ -62,8 +59,7 @@ const Register = ({ setToken, navigate }) => {
             type='password'
             label='Enter Password'
             inputProps={{
-              minLength: 8,
-              maxLength: 20
+              pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}'
             }}
             fullWidth
             placeholder="Enter Password"
@@ -74,8 +70,7 @@ const Register = ({ setToken, navigate }) => {
             type='password'
             label='Confirm Password'
             inputProps={{
-              minLength: 8,
-              maxLength: 20
+              pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}'
             }}
             fullWidth
             placeholder="Confirm Password"
