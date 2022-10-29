@@ -14,7 +14,7 @@ const NewRoutine = ({ token, navigate, fetchRoutines }) => {
     const addRoutine = async () => {
         const results = await addNewRoutine(token, { name, goal, isPublic: true });
         console.log("testing addroutine", results)
-        if (results.success) {
+        if (results.id) {
             fetchRoutines();
             navigate('/routines');
         } else {

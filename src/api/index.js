@@ -63,7 +63,6 @@ export const getRoutines = async () => {
       }
     });
     const results = await response.json();
-    console.log(results)
     return results;
   } catch (ex) {
     console.log('Error getting all public routines')
@@ -106,7 +105,7 @@ export const getMyRoutines = async (token, user) => {
   }
 }
 
-export const updateRoutine = async ({token, name, goal, isPublic, routineId }) => {
+export const updateRoutine = async ({token, name, goal, isPublic, activities, routineId }) => {
   try {
     const response = await fetch(`${baseURL}/routines/${routineId}`, {
       method: "PATCH",
@@ -117,7 +116,8 @@ export const updateRoutine = async ({token, name, goal, isPublic, routineId }) =
       body: JSON.stringify({
         name: name,
         goal: goal,
-        isPublic: isPublic
+        isPublic: isPublic,
+        activities: activities
       })
     })
     const results = response.json();
@@ -174,7 +174,7 @@ export const getActivities = async () => {
   }
 }
 
-export const createActivity = async (token, name, description, count, duration) => {
+export const createActivity = async ({token, name, description, count, duration}) => {
   try {
       const response = await fetch(`${baseURL}/activities`, {
           method: "POST",

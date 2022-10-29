@@ -14,9 +14,9 @@ const NewActivity = ({ token, navigate, fetchActivities }) => {
     const [duration, setDuration] = useState('');
 
     const addActivity = async () => {
-        const results = await createActivity(token, { name, description, count, duration });
+        const results = await createActivity({token, name, description, count, duration });
         console.log("testing addactivity", results)
-        if (results.success) {
+        if (results.id) {
             fetchActivities();
             navigate('/activities');
         } else {
