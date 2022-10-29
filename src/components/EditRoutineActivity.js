@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { updateActivity } from '../api';
+import { updateRoutineActivity, deleteRoutineActivity } from '../api';
 import {
     Grid,
     Paper,
@@ -8,28 +8,27 @@ import {
     Button,
 } from '@mui/material'
 
-const EditActivity = ({ activities, token }) => {
+const EditRoutineActivity = ({ activities, token }) => {
     const { activityId } = useParams();
     const [currentActivity] = activities.filter(activity => activity.id === parseInt(activityId));
     if (currentActivity === undefined) {
         return null;
     }
 
-    const { name, description } = currentActivity;
+    const { name, count, duration } = currentActivity;
 
-    const [newName, setNewName] = useState(name);
-    const [newDescription, setNewDescription] = useState(description);
+    const [newCount, setNewCount] = useState(count);
+    const [newDuration, setNewDuration] = useState(duration);
 
     const navigate = useNavigate();
 
-    async function editActivity() {
-        const updatedActivity = {
-            token: token,
-            name: newName,
-            description: newDescription,
+    async function editRoutineActivity() {
+        const updatedRoutineActivity = {
+            count: newCount,
+            duration: newDuration,
             activityId
         }
-        const results = await updateActivity(updatedActivity)
+        const results = await updateRoutineActivity(updatedRoutineActivity)
     }
 
     const paperStyle = {
@@ -43,26 +42,26 @@ const EditActivity = ({ activities, token }) => {
             <Paper elevation={10} style={paperStyle}>
                 <form onSubmit={(event) => {
                     event.preventDefault();
-                    editActivity();
-                    navigate('/activities');
+                    editRoutineActivity();
+                    navigate('/myroutines');
                 }}>
                     <Grid
                         align='center'
                         className='editRoutineHeading'>
-                        <h2>Edit Activity</h2>
+                        <h2>Edit Routine Activity</h2>
                     </Grid>
                     <TextField
                         style={{ marginBottom: '.75rem' }}
-                        label='Name'
-                        placeholder={name}
+                        label='Count'
+                        placeholder={count}
                         fullWidth required
-                        onChange={(event) => setNewName(event.target.value)} />
+                        onChange={(event) => setNewCount(event.target.value)} />
                     <TextField
                         style={{ marginBottom: '.75rem' }}
-                        label='Description'
-                        placeholder={description}
+                        label='Duration'
+                        placeholder={duration}
                         fullWidth required
-                        onChange={(event) => setNewDescription(event.target.value)} />
+                        onChange={(event) => setNewDuration(event.target.value)} />
                     <Button
                         type='submit'
                         color='primary'
@@ -74,6 +73,11 @@ const EditActivity = ({ activities, token }) => {
                         fullWidth>
                         Update
                     </Button>
+                    <Button
+                        onClick={() => deleteRoutineActivity(token, id)}
+                        style={{ color: '#FB9039' }}>
+                        Delete Routine Activity
+                    </Button>
                 </form>
             </Paper>
         </Grid>
@@ -81,4 +85,4 @@ const EditActivity = ({ activities, token }) => {
     )
 }
 
-export default EditActivity;
+export default EditRoutineActivity;

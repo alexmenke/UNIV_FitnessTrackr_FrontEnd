@@ -10,11 +10,9 @@ import {
 const NewActivity = ({ token, navigate, fetchActivities }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [count, setCount] = useState('');
-    const [duration, setDuration] = useState('');
 
     const addActivity = async () => {
-        const results = await createActivity({token, name, description, count, duration });
+        const results = await createActivity({token, name, description });
         console.log("testing addactivity", results)
         if (results.id) {
             fetchActivities();
@@ -53,7 +51,7 @@ const NewActivity = ({ token, navigate, fetchActivities }) => {
                         placeholder="Enter description"
                         fullWidth required
                         onChange={(event) => setDescription(event.target.value)} />
-                    <TextField
+                    {/* <TextField
                         style={{ marginBottom: '.75rem' }}
                         label="Count"
                         placeholder="Enter count"
@@ -64,7 +62,7 @@ const NewActivity = ({ token, navigate, fetchActivities }) => {
                         label="Duration"
                         placeholder="Enter duration"
                         fullWidth required
-                        onChange={(event) => setDuration(event.target.value)} />
+                        onChange={(event) => setDuration(event.target.value)} /> */}
 
                     <Button
                         onClick={async () => addActivity()}

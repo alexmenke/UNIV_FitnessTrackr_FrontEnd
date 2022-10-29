@@ -27,7 +27,8 @@ import {
     NewRoutine,
     EditRoutine,
     NewActivity,
-    EditActivity
+    EditActivity,
+    EditRoutineActivity
 } from './components'
 
 const App = () => {
@@ -65,16 +66,16 @@ const App = () => {
 
     async function getMe() {
         const storedToken = window.localStorage.getItem('token');
-        
+
         if (!token) {
             if (storedToken) {
                 setToken(storedToken);
             }
             return;
         }
-        
-        const {username} = await getUserInfo(token)
-        if ({username}) {
+
+        const { username } = await getUserInfo(token)
+        if ({ username }) {
             // console.log("FROM GETME", username)
             setUser(username);
         } else {
@@ -156,9 +157,16 @@ const App = () => {
                         activities={activities}
                         token={token}
                         fetchActivities={fetchActivities} />} />
+                <Route
+                    exact path='/routine_activities/edit-routine_activity/:routineActivityId'
+                    element={<EditRoutineActivity
+                        activities={activities}
+                        routines={routines}
+                        token={token}
+                        fetchActivities={fetchActivities}
+                        fetchRoutines={fetchRoutines} />} />
             </Routes>
         </div>
-
     )
 }
 

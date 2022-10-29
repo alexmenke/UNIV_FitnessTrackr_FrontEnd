@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { updateRoutine, addActivityToRoutine, updateActivity } from '../api';
+import { updateRoutine, addActivityToRoutine } from '../api';
 import {
     Grid,
     Paper,
@@ -10,15 +10,65 @@ import {
     Select
 } from '@mui/material'
 
-// const AddActivityToRoutine = (activities, token, fetchActivities) => {
-//     const [newActivity, setNewActivity] = useState(activities);
+const AddActivityToRoutine = (activities, routineId, token) => {
+    // const [newActivity, setNewActivity] = useState(activities);
+    const [count, setCount] = useState('');
+    const [duration, setDuration] = useState('');
 
-//     async function addActivity() {
-//         const response = await addActivityToRoutine()
-//     }
-// }
+    const navigate = useNavigate();
+
+    async function addActivity() {
+        const response = await addActivityToRoutine()
+    }
+
+    return (
+        <form onSubmit={(event) => {
+            event.preventDefault();
+            addActivityToRoutine();
+            navigate(`/myroutines`)
+        }}>
+            <Select
+                name='activities'
+                id='select-activity'
+                value={activities}
+                onChange={(event) => setNewActivity(event.target.value)}>
+                {
+                    activities.map((activity, idx) => {
+                        return 
+                        <option
+                            key={`${idx}:${activity.name}`}
+                            value={activity.name}>{activity.name}
+                        </option>
+                    })
+                }
+            </Select>
+            <TextField
+                style={{ marginBottom: '.75rem' }}
+                label='Count'
+                placeholder='Enter count in reps here'
+                fullWidth required
+                onChange={(event) => setCount(event.target.value)} />
+            <TextField
+                style={{ marginBottom: '.75rem' }}
+                label='Duration'
+                placeholder="Enter duration in minutes here"
+                fullWidth required
+                onChange={(event) => setDuration(event.target.value)} />
+            <Button
+                variant='contained'
+                type='submit'
+                style={{
+                    backgroundColor: '#FB9039',
+                    color: '#646C79'
+                }}>
+                Add Activity
+            </Button>
+        </form>
+    )
+}
 
 const EditRoutine = ({ routines, token, fetchRoutines }) => {
+    const [activateActivity, setActivateActivity] = useState(false)
     const { routineId } = useParams();
     const [currentRoutine] = routines.filter(routine => routine.id === parseInt(routineId));
     if (currentRoutine === undefined) {
@@ -81,6 +131,16 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
                         style={{ marginBottom: '.75rem' }}
                         label='Public'
                         onChange={(event) => setNewIsPublic(event.target.value)} />
+                    <>
+                        <Button
+                            onClick={() => setActivateActivity(!activateActivity)}
+                            style={{ color: '#FB9039' }}>
+                            Add an activity
+                        </Button>
+                        {
+                            activateActivity && <AddActivityToRoutine routineId={routineId} token={token} />
+                        }
+                    </>
                     <Button
                         type='submit'
                         color='primary'
