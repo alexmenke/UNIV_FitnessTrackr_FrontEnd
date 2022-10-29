@@ -161,6 +161,7 @@ const App = () => {
                     exact path='/routine_activities/edit-routine_activity/:routineActivityId'
                     element={<EditRoutineActivity
                         activities={activities}
+                        setActivities={setActivities}
                         routines={routines}
                         token={token}
                         fetchActivities={fetchActivities}

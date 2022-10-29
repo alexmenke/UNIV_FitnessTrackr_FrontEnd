@@ -45,7 +45,7 @@ const MyRoutines = ({ myRoutines, token, fetchMyRoutines }) => {
                                         <CardContent>
                                             <h3 className='routineName'>{name}</h3>
                                             <p className='routineInfo'>{goal}</p>
-                                            <div> 
+                                            <div>
                                                 {routine.activities.map((activity, index) => {
                                                     return (
                                                         <>
@@ -53,9 +53,15 @@ const MyRoutines = ({ myRoutines, token, fetchMyRoutines }) => {
                                                             <h6> Description: {activity.description} </h6>
                                                             <h6> Duration: {activity.duration} Minutes </h6>
                                                             <h6> Count : {activity.count} Reps </h6>
+                                                            <Link to={`/routine_activity/edit-routine_activity/${id}`}>
+                                                                <Button
+                                                                    style={{ color: '#FB9039' }}>
+                                                                    Edit Activity
+                                                                </Button>
+                                                            </Link>
                                                         </>)
                                                 })}
-                                            </div> 
+                                            </div>
                                         </CardContent>
                                         <CardActions>
                                             <Link to={`/routines/edit-routine/${id}`}>

@@ -10,16 +10,14 @@ import {
 
 const EditRoutineActivity = ({ activities, token }) => {
     const { activityId } = useParams();
-    const [currentActivity] = activities.filter(activity => activity.id === parseInt(activityId));
-    if (currentActivity === undefined) {
+    const [currentRoutineActivity] = activities.filter(activity => activity.id === parseInt(activityId));
+    if (currentRoutineActivity === undefined) {
         return null;
     }
 
-    const { name, count, duration } = currentActivity;
-
+    const { name, count, duration } = currentRoutineActivity;
     const [newCount, setNewCount] = useState(count);
     const [newDuration, setNewDuration] = useState(duration);
-
     const navigate = useNavigate();
 
     async function editRoutineActivity() {
@@ -48,7 +46,7 @@ const EditRoutineActivity = ({ activities, token }) => {
                     <Grid
                         align='center'
                         className='editRoutineHeading'>
-                        <h2>Edit Routine Activity</h2>
+                        <h2>Edit `${currentRoutineActivity.name}`</h2>
                     </Grid>
                     <TextField
                         style={{ marginBottom: '.75rem' }}
@@ -81,7 +79,6 @@ const EditRoutineActivity = ({ activities, token }) => {
                 </form>
             </Paper>
         </Grid>
-
     )
 }
 

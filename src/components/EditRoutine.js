@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { updateRoutine, addActivityToRoutine } from '../api';
+import { updateRoutine, addActivityToRoutine, getActivities } from '../api';
 import {
     Grid,
     Paper,
@@ -10,8 +10,9 @@ import {
     Select
 } from '@mui/material'
 
-const AddActivityToRoutine = (activities, routineId, token) => {
-    // const [newActivity, setNewActivity] = useState(activities);
+const AddActivityToRoutine = ({activities, fetchActivities, setActivities, routineId, token}) => {
+    const [newActivity, setNewActivity] = useState(activities);
+    // console.log('testing activities', activities)
     const [count, setCount] = useState('');
     const [duration, setDuration] = useState('');
 
@@ -21,6 +22,15 @@ const AddActivityToRoutine = (activities, routineId, token) => {
         const response = await addActivityToRoutine()
     }
 
+    async function fetchActivities() {
+        const results = await getActivities()
+        setActivities(results);
+    }
+
+    useEffect(() => {
+        fetchActivities();
+    }, [])
+
     return (
         <form onSubmit={(event) => {
             event.preventDefault();
@@ -29,16 +39,17 @@ const AddActivityToRoutine = (activities, routineId, token) => {
         }}>
             <Select
                 name='activities'
-                id='select-activity'
+                id='activityId'
                 value={activities}
                 onChange={(event) => setNewActivity(event.target.value)}>
                 {
                     activities.map((activity, idx) => {
-                        return 
+                        return
                         <option
                             key={`${idx}:${activity.name}`}
                             value={activity.name}>{activity.name}
                         </option>
+
                     })
                 }
             </Select>
@@ -155,7 +166,6 @@ const EditRoutine = ({ routines, token, fetchRoutines }) => {
                 </form>
             </Paper>
         </Grid>
-
     )
 }
 
