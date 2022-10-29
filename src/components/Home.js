@@ -15,7 +15,7 @@ const Home = () => {
               <h1>Welcome to Fitness Trackr</h1>
               <h2>Keep track of your fitness goals and gains with the Fitness Trackr App! Find a new routine or add a new one yourself!</h2>
                 <CardActions>
-                  <Link to='/register' className="btn">
+                  <Link to='/users/register' className="btn">
                     <Button
                       style={{
                         margin: '.50rem',
@@ -41,6 +41,7 @@ const Home = () => {
           </Card>
         </Paper>
       </div>
+      
     )
 }
 
