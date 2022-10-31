@@ -49,6 +49,10 @@ const Register = ({ setToken, navigate }) => {
             style={{ marginBottom: '.75rem' }}
             type='text'
             label='Enter Username'
+            inputProps={{
+              minLength: 4,
+              maxLength: 16,
+            }}
             fullWidth
             placeholder="Enter Username"
             required
@@ -59,7 +63,8 @@ const Register = ({ setToken, navigate }) => {
             type='password'
             label='Enter Password'
             inputProps={{
-              pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}'
+              minLength: 8,
+              maxLength: 16,
             }}
             fullWidth
             placeholder="Enter Password"
@@ -70,7 +75,8 @@ const Register = ({ setToken, navigate }) => {
             type='password'
             label='Confirm Password'
             inputProps={{
-              pattern: '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}'
+              minLength: 8,
+              maxLength: 16,
             }}
             fullWidth
             placeholder="Confirm Password"
@@ -78,10 +84,9 @@ const Register = ({ setToken, navigate }) => {
             onChange={(event) => setConfirmPassword(event.target.value)} />
           <h4>Password Requirements:</h4>
             <ul>
-                <li>Between 8 and 16 characters</li>
-                <li>A capital letter</li>
-                <li>A lowercase letter</li>
-                <li>A number</li>
+                <li>At least 8 characters</li>
+                <li>No more than 16 characters</li>
+                
             </ul>
           <Button
             type='submit'
